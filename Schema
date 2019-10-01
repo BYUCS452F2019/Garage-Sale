@@ -1,0 +1,55 @@
+Schema
+
+Tables And Columns:
+  •	User (UserID*, Password, Name, Email, Phone)
+  •	Items (ItemID*, Price, Name, Description, DateAdded, UserID, AreaCode, SellerID_Blobs)
+    o	Foreign Key UserID, references User
+    o	Foreign Key SellerID_Blobs, references User
+  •	Sold_Items (ItemID*, Price, Name, Description, DateAdded, DateSold, UserID, AreaCode, SellerID, BuyerID)
+    o	Foreign Key BuyerID, references User
+    o	Foreign Key SellerID, references User
+*  The key columns.
+
+ Tables:
+  •	User:
+    o	This table contains the user information.
+    o	The entity this table represents a user of the application.
+    o	All other tables depend on this table since they all make a reference to at least one user.
+    o	Columns:
+      	UserID is a unique key. Randomly created upon creation of the account. 
+      	Password represents the user’s account password. 
+      	Phone is the user’s phone number. 
+      	Email is the User’s email. 
+  •	Items:
+    o	This table contains sales item information.
+    o	This table represents the sales items within the online marketplace.
+    o	Foreign key is UserID.
+    o	Columns:
+      	ItemID is the unique key for a specific item.
+      	Price is the price of the item. 
+      	Name is the name of the item, given by the User who owns it. 
+      	Description is a description of the item given by the User who owns it. Probably a physical description, including details like wear and tear.
+      	DateAdded is the date when the item was put for sale.
+      	UserID is a foreign key that is used to reference the owner of the item.
+      	AreaCode is the location (zip code) of where the item will be sold.
+      	ProxyID_Blobs is a Blob containing userIDs of the people who are authorized to sell a specific item.
+  •	Sold_Items:
+    o	This table contains sold items. Once an item has been sold, it will be moved from the Items table to this table.
+    o	The table represents sold items.
+    o	Foreign key is UserID.
+    o	Columns:
+      	ItemID is the unique key for a specific item.
+      	Price is the price of the item.
+      	Name is the name of the item, given by the User who owns it.
+      	Description is a description of the item given by the User who owns it.
+      	DateAdded is the date when the item was put for sale.
+      	DateSold is the date when the item was sold.
+      	UserID is a foreign key that is used to reference the owner of the item.
+      	AreaCode is the location (zip code) of where the item will be sold.
+      	SellerID is a foreign key that references the seller of an item.
+      	BuyerID is a foreign key that references the buyer of an item.
+
+Evidence of Normalization:
+  •	We reduced redundancy
+  •	Once an item is sold, it is removed from the Items table and added to the Sold_Items table.
+
