@@ -1,24 +1,45 @@
+-- User(UserID, Password, Name, Email, Phone)
+-- Items(ItemID, Price, Name, Description, DateAdded, UserID, AreaCode, Sold, SellerIDBlob)
+--  Foreign Key: UserID references User
+--  Foreign Key: SellerIDBlob references User
+-- SoldItems(ItemID, DateSold, SellerID, BuyerID)
+--  Foreign Key: ItemID references Items
+--  Foreign Key: SellerID references User
+--  Foreign Key: BuyerID references User
+
 -- Specify database to use
 \c contacts;
 
 -- Create tables
-CREATE TABLE IF NOT EXISTS contacts (
- owner_email VARCHAR (256) NOT NULL,
- contact_email VARCHAR (256) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS logins (
-  email VARCHAR (256) PRIMARY KEY,
-  password VARCHAR (256)
-);
-
-CREATE TABLE IF NOT EXISTS profiles (
- index SERIAL PRIMARY KEY,
- name VARCHAR (80) NOT NULL,
+CREATE TABLE IF NOT EXISTS users (
+ user_id VARCHAR (256) PRIMARY KEY NOT NULL,
+ password VARCHAR (256) NOT NULL,
+ name VARCHAR (256) NOT NULL,
  email VARCHAR (256) NOT NULL,
- phone VARCHAR (10) NOT NULL
+ phone_num VARCHAR (256) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS items (
+  item_id VARCHAR (256) PRIMARY KEY NOT NULL,
+  price VARCHAR (256) NOT NULL,
+  item_name VARCHAR (256) NOT NULL,
+  item_descr VARCHAR (256) NOT NULL,
+  date_added VARCHAR (256) NOT NULL,
+  user_id VARCHAR (256) NOT NULL,
+  area_code VARCHAR (256) NOT NULL,
+  sold VARCHAR (256) NOT NULL,
+  seller_ids VARCHAR (256) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS sold_items (
+ item_id VARCHAR (256) PRIMARY KEY NOT NULL,
+ date_sold VARCHAR (256) NOT NULL,
+ seller_id VARCHAR (256) NOT NULL,
+ buyer_id VARCHAR (256) NOT NULL
 );
 
 -- Create indexes
-CREATE INDEX owner_email ON contacts (owner_email);
-CREATE INDEX email ON profiles (email);
+CREATE INDEX user_id ON users (user_id);
+CREATE INDEX user_id ON items (user_id);
+CREATE INDEX item_id ON items (item_id);
+CREATE INDEX item_id ON sold_items (item_id);
