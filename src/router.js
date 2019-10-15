@@ -32,7 +32,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "register" */ './views/Register.vue'),
       meta: {
         authenticatedRoute: false,
-        navIndex: '5'
+        navIndex: '6'
       }
     },
     {

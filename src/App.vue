@@ -1,6 +1,6 @@
 <template>
   <el-container id="app">
-    <el-header><h1 id="title">Garage Sale</h1></el-header>
+    <el-header><h1 id="title"><img src="./assets/logo.png" height="40" width="40"> Garage Sale</h1></el-header>
     <el-container>
       <el-aside width="200px">
         <el-menu id="main-menu" :default-active="$route.meta.navIndex">
@@ -10,7 +10,7 @@
           <el-menu-item index="2" v-if="!isLoggedIn" @click="$router.push({ name: 'login' })">
             Login
           </el-menu-item>
-          <el-menu-item index="5" v-if="!isLoggedIn" @click="$router.push({ name: 'register' })">
+          <el-menu-item index="6" v-if="!isLoggedIn" @click="$router.push({ name: 'register' })">
             Register
           </el-menu-item>
           <el-menu-item index="3" v-if="isLoggedIn" @click="$router.push({ name: 'contacts' })">
@@ -71,7 +71,7 @@ body, html {
   #title {
     background: #2c3e50;
     color: #FFF;
-    padding: 16px 20px;
+    padding: 7px 20px;
     margin: 0 -20px;
   }
 
