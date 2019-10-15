@@ -10,6 +10,9 @@
           <el-menu-item index="2" v-if="!isLoggedIn" @click="$router.push({ name: 'login' })">
             Login
           </el-menu-item>
+          <el-menu-item index="2" v-if="!isLoggedIn" @click="$router.push({ name: 'register' })">
+            Register
+          </el-menu-item>
           <el-menu-item index="3" v-if="isLoggedIn" @click="$router.push({ name: 'contacts' })">
             Contacts
           </el-menu-item>

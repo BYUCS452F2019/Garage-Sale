@@ -27,6 +27,15 @@ export default new Router({
       }
     },
     {
+      path: '/register',
+      name: 'register',
+      component: () => import(/* webpackChunkName: "register" */ './views/Register.vue'),
+      meta: {
+        authenticatedRoute: false,
+        navIndex: '2'
+      }
+    },
+    {
       path: '/contacts',
       name: 'contacts',
       component: () => import(/* webpackChunkName: "contacts" */ './views/Contacts.vue'),
