@@ -17,6 +17,10 @@
       <el-form-item label="StudentID">
         <el-input type="studentID" v-model="form.studentID"></el-input>
       </el-form-item>
+      <el-form-item label="IDPhotocopy" method="post" enctype="multipart/form-data">
+        <el-input type="file" name="files[]" single />
+        <el-input type="submit" value="Upload File" name="submit"/>
+      </el-form-item >
       <el-form-item>
         <el-button type="primary" @click="register()">Register</el-button>
       </el-form-item>
