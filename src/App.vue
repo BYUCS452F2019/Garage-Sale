@@ -1,6 +1,6 @@
 <template>
   <el-container id="app">
-    <el-header><h1 id="title">Contact Keeper</h1></el-header>
+    <el-header><h1 id="title">Garage Sale</h1></el-header>
     <el-container>
       <el-aside width="200px">
         <el-menu id="main-menu" :default-active="$route.meta.navIndex">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Welcome to the <strong>Contact Keeper</strong> app where you can keep all of your contacts up to date.</p>
+    <p>Welcome to the <strong>Garage Sale</strong> app where you can buy and sell without worrying about scammers.</p>
     <p>
       Please <router-link to="/login">Log In</router-link>
     </p>
