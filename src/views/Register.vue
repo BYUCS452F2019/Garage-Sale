@@ -56,7 +56,7 @@ export default {
         lastName: this.form.lastName,
         studentID: this.form.studentID
       })
-      this.$router.push({ name: 'users'});
+      this.$router.push({ name: 'pending'});
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
