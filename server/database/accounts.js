@@ -10,10 +10,10 @@ module.exports = function (client) {
     return rowCount > 0
   }
 
-  dbAccounts.createAccount = async function (email, password) {
+  dbAccounts.createAccount = async function (email, password, firstName, lastName, studentID) {
     const { rowCount } = await client.query({
       text: 'INSERT INTO logins (email, password) VALUES ($1, $2)',
-      values: [ email, password ]
+      values: [ email, password, firstName, lastName, studentID ]
     })
     return rowCount > 0
   }
