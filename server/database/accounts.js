@@ -4,7 +4,7 @@ module.exports = function (client) {
 
   dbAccounts.checkLogin = async function (email, password) {
     const { rowCount } = await client.query({
-      text: 'SELECT * FROM users WHERE email = $1 AND password = $2',
+      text: 'SELECT * FROM users WHERE email = $2 AND password = $3',
       values: [ email, password ]
     })
     return rowCount > 0
