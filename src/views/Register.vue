@@ -53,7 +53,7 @@ export default {
         email: this.form.email, 
         password: this.form.password
       })
-      this.$router.push({ name: 'contacts'});
+      this.$router.push({ name: 'users'});
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);

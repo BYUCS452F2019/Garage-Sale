@@ -8,7 +8,7 @@
 --  Foreign Key: BuyerID references User
 
 -- Specify database to use
-\c contacts;
+\c users;
 
 -- Create tables
 CREATE TABLE IF NOT EXISTS users (
@@ -40,6 +40,6 @@ CREATE TABLE IF NOT EXISTS sold_items (
 
 -- Create indexes
 CREATE INDEX user_id ON users (user_id);
-CREATE INDEX user_id ON items (user_id);
+CREATE INDEX item_user_id ON items (user_id);
 CREATE INDEX item_id ON items (item_id);
-CREATE INDEX item_id ON sold_items (item_id);
+CREATE INDEX sold_item_id ON sold_items (item_id);

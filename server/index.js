@@ -5,7 +5,7 @@ const dbClient = new Pool({
   user: 'postgres',
   password: 'passwrd',
   host: 'localhost',
-  database: 'contacts',
+  database: 'users',
   port: '5432'
 })
 
