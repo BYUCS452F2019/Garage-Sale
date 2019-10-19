@@ -25,7 +25,7 @@
           single
           :file-list="fileList">
           <el-button size="small" type="primary">Upload ID</el-button>
-          <span id="fileDescription" slot="tip" class="el-upload__tip">jpg/png files with a size less than 256kb</span>
+          <span id="fileDescription" slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</span>
         </el-upload>
       </el-form-item>
       <el-form-item>
