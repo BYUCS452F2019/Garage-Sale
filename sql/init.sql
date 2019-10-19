@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS users (
  password VARCHAR (256) NOT NULL,
  name VARCHAR (256) NOT NULL,
  email VARCHAR (256) NOT NULL,
- phone_num VARCHAR (256) NOT NULL,
  id_photo BYTEA NOT NULL,
  validated BOOLEAN NOT NULL
 );

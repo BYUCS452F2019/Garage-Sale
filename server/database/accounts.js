@@ -4,16 +4,17 @@ module.exports = function (client) {
 
   dbAccounts.checkLogin = async function (email, password) {
     const { rowCount } = await client.query({
-      text: 'SELECT * FROM logins WHERE email = $1 AND password = $2',
+      text: 'SELECT * FROM users WHERE email = $1 AND password = $2',
       values: [ email, password ]
     })
     return rowCount > 0
   }
 
-  dbAccounts.createAccount = async function (email, password, firstName, lastName, studentID) {
+  dbAccounts.createAccount = async function (email, password, firstName, lastName, studentID, image) {
+    const validated = false;
     const { rowCount } = await client.query({
-      text: 'INSERT INTO logins (email, password) VALUES ($1, $2)',
-      values: [ email, password, firstName, lastName, studentID ]
+      text: 'INSERT INTO users (studentID, email, password, firstName, lastName, image, validated) VALUES ($1, $2, $3, $4, $5, $6)',
+      values: [ studentID, email, password, firstName, lastName, image, validated]
     })
     return rowCount > 0
   }
