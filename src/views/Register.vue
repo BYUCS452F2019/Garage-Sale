@@ -16,11 +16,18 @@
       </el-form-item>
       <el-form-item label="StudentID">
         <el-input type="studentID" v-model="form.studentID"></el-input>
+        <el-upload
+          class="upload-demo"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          single
+          :file-list="fileList">
+          <el-button size="small" type="primary">Upload ID</el-button>
+          <span id="fileDescription" slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</span>
+        </el-upload>
       </el-form-item>
-      <el-form-item label="IDPhotocopy" method="post" enctype="multipart/form-data">
-        <el-input type="file" name="files[]" single />
-        <el-input type="submit" value="Upload File" name="submit"/>
-      </el-form-item >
       <el-form-item>
         <el-button type="primary" @click="register()">Register</el-button>
       </el-form-item>
@@ -47,7 +54,20 @@ export default {
         password: this.form.password
       })
       this.$router.push({ name: 'contacts'});
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
     }
   }
 }
 </script>
+
+<style>
+@import '../assets/styles/register.css';
+</style>
