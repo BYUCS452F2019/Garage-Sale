@@ -51,7 +51,10 @@ export default {
     register () {
       this.$store.dispatch('userRegister',{
         email: this.form.email, 
-        password: this.form.password
+        password: this.form.password,
+        firstName: this.form.firstName,
+        lastName: this.form.lastName,
+        studentID: this.form.studentID
       })
       this.$router.push({ name: 'users'});
     },
