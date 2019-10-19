@@ -69,6 +69,15 @@ export default new Router({
         authenticatedRoute: true,
         navIndex: '4'
       }
+    },
+    {
+      path: '/itemslist',
+      name: 'itemslist',
+      component: () => import(/* webpackChunkName: "contacts" */ './views/ItemsPage.vue'),
+      meta: {
+        authenticatedRoute: true,
+        navIndex: '5'
+      }
     }
   ]
 })
