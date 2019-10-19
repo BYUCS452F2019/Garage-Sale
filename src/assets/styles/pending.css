@@ -1,0 +1,20 @@
+#outsideContainer{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#pendingText{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: -15%;
+    margin-right: 5%;
+    color: #656176;
+}
+
+#warningMessage{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    color: #656176;
+}
