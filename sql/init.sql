@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS users (
  password VARCHAR (256) NOT NULL,
  name VARCHAR (256) NOT NULL,
  email VARCHAR (256) NOT NULL,
- phone_num VARCHAR (256) NOT NULL
+ phone_num VARCHAR (256) NOT NULL,
+ id_photo BYTEA NOT NULL,
+ validated BOOLEAN NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS items (
@@ -43,3 +45,8 @@ CREATE INDEX user_id ON users (user_id);
 CREATE INDEX item_user_id ON items (user_id);
 CREATE INDEX item_id ON items (item_id);
 CREATE INDEX sold_item_id ON sold_items (item_id);
+
+-- ALTER TABLE users
+-- ADD IF NOT EXISTS phone_num VARCHAR (256) NOT NULL,
+-- ADD IF NOT EXISTS id_photo BYTEA NOT NULL,
+-- ADD IF NOT EXISTS validated BOOLEAN NOT NULL

@@ -17,6 +17,10 @@ dbClient.query('SELECT NOW()', (err, res) => {
   }
 })
 
+function register() {
+  
+}
+
 server(dbClient, 3000)
   .then(data => {
     console.log('The server is listening on port: ' + data.port)
