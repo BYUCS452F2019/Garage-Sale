@@ -35,6 +35,7 @@
   </div>
 </template>
 
+
 <script>
 
 export default {
@@ -68,6 +69,46 @@ export default {
       return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
     }
   }
+}
+
+var p;
+var canvas = document.createElement("canvas");
+var img1=document.createElement("img"); 
+
+function getBase64Image(){     
+    p=document.getElementById("fileUpload").value;
+    img1.setAttribute('src', p); 
+    canvas.width = img1.width; 
+    canvas.height = img1.height; 
+    var ctx = canvas.getContext("2d"); 
+    ctx.drawImage(img1, 0, 0); 
+    var dataURL = canvas.toDataURL("image/png");
+    alert("from getbase64 function" + dataURL);    
+    return dataURL;
+} 
+
+function b64toByteArray(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+      
+      return bytearrays[0];
 }
 </script>
 
