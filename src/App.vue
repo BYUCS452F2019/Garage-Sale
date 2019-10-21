@@ -7,11 +7,11 @@
           <el-menu-item index="1" v-if="!isLoggedIn" @click="$router.push({ name: 'home' })">
             Home
           </el-menu-item>
-          <el-menu-item index="8" v-if="!isLoggedIn" @click="$router.push({ name: 'login' })">
-            Verification
+          <el-menu-item index="2" v-if="!isLoggedIn" @click="$router.push({ name: 'login' })">
+            Login
           </el-menu-item>
           <el-menu-item index="6" v-if="!isLoggedIn" @click="$router.push({ name: 'register' })">
-            Settings
+            Register
           </el-menu-item>
           <el-menu-item index="3" v-if="isLoggedIn" @click="$router.push({ name: 'contacts' })">
             Contacts
