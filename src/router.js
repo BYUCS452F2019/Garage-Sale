@@ -78,6 +78,15 @@ export default new Router({
         authenticatedRoute: false,
         navIndex: '7'
       }
+    },
+    {
+      path: '/verification',
+      name: 'verification',
+      component: () => import(/* webpackChunkName: "pending" */ './views/Verification.vue'),
+      meta: {
+        authenticatedRoute: false,
+        navIndex: '8'
+      }
     }
   ]
 })
