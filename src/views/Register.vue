@@ -20,10 +20,10 @@
           class="upload-demo"
           action="https://jsonplaceholder.typicode.com/posts/"
           :on-preview="handlePreview"
-          :on-remove="handleRemove"
           :before-remove="beforeRemove"
           single
-          :file-list="fileList">
+          :file-list="fileList"
+          :auto-upload="false">
           <el-button size="small" type="primary">Upload ID</el-button>
           <span id="fileDescription" slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</span>
         </el-upload>
@@ -37,15 +37,14 @@
 
 
 <script>
-
 export default {
-  name: 'register',
   data: () => {
     return {
       form: {
         email: "",
         password: ""
-      }
+      },
+      fileList: []
     }
   },
   methods: {
@@ -64,6 +63,9 @@ export default {
     },
     handlePreview(file) {
       console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
