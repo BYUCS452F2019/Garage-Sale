@@ -16,20 +16,10 @@
       </el-form-item>
       <el-form-item label="StudentID">
         <el-input type="studentID" v-model="form.studentID"></el-input>
-        <el-upload
-          class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-preview="handlePreview"
-          :before-remove="beforeRemove"
-          single
-          :file-list="fileList"
-          :auto-upload="false">
-          <el-button size="small" type="primary">Upload ID</el-button>
-          <span id="fileDescription" slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</span>
-        </el-upload>
+        <input type="file" @change="onFileChanged">
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="register()">Register</el-button>
+        <el-button type="primary" @click="register">Register</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -69,6 +59,10 @@ export default {
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
+    },
+    onFileChanged (event) {
+      const file = event.target.files[0]
+      this.fileList.push(file);
     }
   }
 }
