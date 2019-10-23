@@ -1,6 +1,34 @@
 <template>
     <div><h2>Items</h2>
     <p>This will be where the list of items will be!</p>
+    <el-button @click="addItemMenuVisible = true">Add Item</el-button>
+    <el-dialog
+    :visible.sync="addItemMenuVisible"
+    title="Add Item"
+    width="40%">
+    <el-form 
+          ref="form" 
+          :model="form" 
+          label-width="120px">
+          <el-form-item label="Item Name">
+            <el-input v-model="form.name"/>
+          </el-form-item>
+          <el-form-item label="Item Description">
+            <el-input v-model="form.description"/>
+          </el-form-item>
+          <el-form-item label="Set Price">
+            <el-input v-model="form.price"/>
+          </el-form-item>
+        </el-form>
+        <span 
+          slot="footer" 
+          class="dialog-footer">
+          <el-button @click="addItemMenuVisible = false">Cancel</el-button>
+          <el-button 
+            type="primary" 
+            @click="addItem">Confirm</el-button>
+        </span>
+    </el-dialog>
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -59,13 +87,55 @@ export default {
             price: '$10',
             areacode: '55555',
             seller: 'Bob'
-          }]
+          }],
+          addItemMenuVisible: false,
+          form: {
+            name: '',
+            description: '',
+            price: ''
+          },
+          date: '0',
+          itemdate: ''
         }
   },
   methods: {
     buy() {
       console.log("hi");
-      console.log(index, row);
+    },
+    addItem() {
+      if (this.form.name === '') {
+        this.$alert('Please enter an item name', 'Error', {
+          confirmButtonText: 'OK'
+        })
+      }
+      else if (this.form.description === '') {
+        this.$alert('Please enter an item description', 'Error', {
+          confirmButtonText: 'OK'
+        })
+      }
+      else if (this.form.price === '' || isNaN(this.form.price)) {
+        this.$alert('Please enter a numerical item price', 'Error', {
+          confirmButtonText: 'OK'
+        })
+      }
+      else {
+        //code to add the item to the database
+        console.log("Added item");
+        this.date = new Date();
+        this.itemdate = this.date.getMonth() + '-' + this.date.getDate() + '-' + this.date.getFullYear();
+        console.log(this.itemdate);
+        const item = {
+          name: this.form.name, 
+          description: this.form.description, 
+          price: this.form.price, 
+          //owner: ,
+          //seller: ,
+          //itemid: ,
+          date: this.itemdate
+        }
+        this.addItemMenuVisible = false;
+        //store dispatch or something
+      }
     }
   }
 }
