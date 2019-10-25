@@ -42,12 +42,15 @@ export default {
   methods: {
     register () {
       this.$store.dispatch('userRegister',{
-        email: this.form.email, 
+        user_id: this.form.studentID,
         password: this.form.password,
         firstName: this.form.firstName,
         lastName: this.form.lastName,
-        studentID: this.form.studentID
-      })
+        email: this.form.email,
+        id_photo: this.file,
+        validated: false
+      });
+
       this.$router.push({ name: 'pending'});
     },
     onFileChanged (event) {

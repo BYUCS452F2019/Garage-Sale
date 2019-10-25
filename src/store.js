@@ -6,8 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user: null,
-    contacts: []
+    users: [],
+    items: []
   },
   getters: {
 
@@ -26,12 +26,20 @@ export default new Vuex.Store({
         method: 'post',
         data: { email, password },
         url: 'http://localhost:3000/register'
-      })
-      console.log(res)
+      });
+      console.log(res);
       commit('updateUser', { email, name: '', phone: '' })
     },
     updateProfile ({ commit }, { email, name, phone }) {
 
+    },
+    async userRegister({ commit, dispatch, getters, state }, {user_id, password, firstName, lastName, email, id_photo, validated}) {
+      const res = await axios({
+        method: 'post',
+        data: {user_id, password, firstName, lastName, email, id_photo, validated},
+        url: 'http://localhost:4000/register'
+      });
+      console.log(res);
     },
     async userLogin ({ commit, dispatch, getters, state }, { email, password }) {
       const res = await axios({
