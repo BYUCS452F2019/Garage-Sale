@@ -19,7 +19,10 @@
           <el-menu-item index="4" @click="$router.push({ name: 'profile' })">
             Profile
           </el-menu-item>
-          <el-menu-item index="5" v-if="isLoggedIn">
+          <el-menu-item index="5" v-if="!isLoggedIn" @click="$router.push({ name: 'itemslist' })">
+            Item List
+          </el-menu-item>
+          <el-menu-item index="7" v-if="isLoggedIn">
             Logout
           </el-menu-item>
         </el-menu>
