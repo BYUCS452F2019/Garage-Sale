@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    username: { type: String, unique: true, required: true },
+    user_id: { type: String, unique: true, required: true },
+    password: { type: String, unique:false, required: true },
     hash: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    createdDate: { type: Date, default: Date.now }
+    email: { type: String, required: true },
+    id_photo: { type: Buffer, contentType: String },
+    validated: { type: Boolean, required: true }
 });
 
 schema.set('toJSON', { virtuals: true });
