@@ -4,7 +4,7 @@
       <span>Are you sure you want to delete remove this item for sale?</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addItemMenuVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="addItem">Yes</el-button>
+        <el-button type="primary" @click="removeItem">Yes</el-button>
       </span>
     </el-dialog>
 
@@ -55,6 +55,11 @@ export default {
   },
   components: {
     ContactInfo
+  },
+  methods: {
+    removeItem() {
+      this.addItemMenuVisible = false;
+    }
   }
 };
 </script>
