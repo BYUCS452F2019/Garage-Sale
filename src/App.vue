@@ -16,7 +16,7 @@
           <el-menu-item index="3" v-if="isLoggedIn" @click="$router.push({ name: 'contacts' })">
             Contacts
           </el-menu-item>
-          <el-menu-item index="4" v-if="isLoggedIn" @click="$router.push({ name: 'profile' })">
+          <el-menu-item index="4" @click="$router.push({ name: 'profile' })">
             Profile
           </el-menu-item>
           <el-menu-item index="5" v-if="!isLoggedIn" @click="$router.push({ name: 'itemslist' })">

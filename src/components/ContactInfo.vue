@@ -1,22 +1,23 @@
 <template>
   <div id="contact-info">
-    <div class="avatar">
+    <!-- <div class="avatar">
       <img :src="image">
-    </div>
+    </div>-->
     <div class="details">
-      <label-value label="Name" value="James"></label-value>
-      <label-value label="Email" value="james_speirs@byu.edu"></label-value>
-      <label-value label="Phone" value="555-555-5555"></label-value>
+      <label-value label="First Name" value="John"></label-value>
+      <label-value label="Last Name" value="Doe"></label-value>
+      <label-value label="Email" value="john_doe@byu.edu"></label-value>
+      <label-value label="StudentID" value="420420420"></label-value>
     </div>
   </div>
 </template>
 
 <script>
-import LabelValue from './LabelValue'
-import avatar from '@/assets/avatar.png'
+import LabelValue from "./LabelValue";
+import avatar from "@/assets/avatar.png";
 
 export default {
-  name: 'ContactInfo',
+  name: "ContactInfo",
   components: { LabelValue },
   props: {
     image: {
@@ -24,7 +25,7 @@ export default {
       default: avatar
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -46,7 +47,7 @@ export default {
   }
 
   .details {
-    flex: 1
+    flex: 1;
     min-width: 50%;
 
     > * {
