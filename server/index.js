@@ -5,7 +5,7 @@ const dbClient = new Pool({
   user: 'postgres',
   password: 'passwrd',
   host: 'localhost',
-  database: 'contacts',
+  database: 'users',
   port: '5432'
 })
 
@@ -16,6 +16,10 @@ dbClient.query('SELECT NOW()', (err, res) => {
     console.log('Connected to database')
   }
 })
+
+function register() {
+  
+}
 
 server(dbClient, 3000)
   .then(data => {
