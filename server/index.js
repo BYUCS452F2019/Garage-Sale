@@ -1,5 +1,5 @@
 const { Pool } = require('pg')
-const server = require('./server')
+const server = require('./sql-server')
 
 const dbClient = new Pool({
   user: 'postgres',
