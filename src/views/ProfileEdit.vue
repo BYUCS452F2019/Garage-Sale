@@ -35,30 +35,25 @@
 </template>
 
 <script>
-
 export default {
-  name: 'ProfileEdit',
+  name: "ProfileEdit",
   data: () => {
     return {
       profile: {
-        name: '',
-        email: '',
-        phone: ''
+        name: "",
+        email: "",
+        phone: ""
       },
       password: {
-        old: '',
-        new: '',
-        retype: ''
+        old: "",
+        new: "",
+        retype: ""
       }
-    }
+    };
   },
   methods: {
-    changePassword () {
-
-    },
-    update () {
-      
-    }
+    changePassword() {},
+    update() {}
   }
-}
+};
 </script>
