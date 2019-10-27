@@ -34,6 +34,7 @@ export default new Vuex.Store({
 
     },
     async userRegister({ commit, dispatch, getters, state }, {user_id, password, firstName, lastName, email, id_photo, validated}) {
+      console.log("In store.js");
       const res = await axios({
         method: 'post',
         data: {user_id, password, firstName, lastName, email, id_photo, validated},
