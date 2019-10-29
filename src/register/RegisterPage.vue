@@ -24,8 +24,8 @@
             </div>
             <div class="form-group">
                 <label htmlFor="studentID">Student ID</label>
-                <input type="text" name="studentID" class="form-control" />
-        
+                <input type="text" v-model="user.password" v-validate="{ required: true, min: 6 }" name="studentID" class="form-control" :class="{ 'is-invalid': submitted && errors.has('studentID') }" />
+                <div v-if="submitted && errors.has('studentID')" class="invalid-feedback">{{ errors.first('studentID') }}</div>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" :disabled="status.registering">Register</button>
