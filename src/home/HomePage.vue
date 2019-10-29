@@ -16,6 +16,9 @@
         <p>
             <router-link to="/login">Logout</router-link>
         </p>
+        <p>
+            <router-link to="/items">Items</router-link>
+        </p>
     </div>
 </template>
 
