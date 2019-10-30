@@ -1,47 +1,65 @@
 <template>
-  <div class="about">
-    <h2>Register</h2>
-    <el-form ref="form" v-model="form" label-width="80px" @submit.prevent="register()">
-      <el-form-item label="Email">
-        <el-input v-model="form.email"></el-input>
-      </el-form-item>
-      <el-form-item label="Password">
-        <el-input type="password" v-model="form.password"></el-input>
-      </el-form-item>
-      <el-form-item label="FirstName">
-        <el-input type="firstName" v-model="form.firstName"></el-input>
-      </el-form-item>
-      <el-form-item label="LastName">
-        <el-input type="lastName" v-model="form.lastName"></el-input>
-      </el-form-item>
-      <el-form-item label="StudentID">
-        <el-input type="studentID" v-model="form.studentID"></el-input>
-        <input type="file" @change="onFileChanged">
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="register">Register</el-button>
-      </el-form-item>
-    </el-form>
+  <div>
+    <b-form @submit.prevent="registerUser">
+      <b-form-group
+        id="input-group-1"
+        label="Email address:"
+        label-for="input-1"
+        description="We'll never share your email with anyone else."
+      >
+        <b-form-input
+          id="input-1"
+          v-model="form.email"
+          type="email"
+          required
+          placeholder="Enter email"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-form-input id="input-2" v-model="form.firstName" required placeholder="Enter name"></b-form-input>
+      </b-form-group>
+
+      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-form-input id="input-2" v-model="form.lastName" required placeholder="Enter name"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-form-input id="input-2" v-model="form.user_id" required placeholder="Enter name"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+        <b-form-input id="input-2" v-model="form.password" required placeholder="Enter name"></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary">Submit</b-button>
+      <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
+    </b-form>
+    <b-card class="mt-3" header="Form Data Result">
+      <pre class="m-0">{{ form }}</pre>
+    </b-card>
   </div>
 </template>
 
-
 <script>
-import fs from 'fs';
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data: () => {
+  data() {
     return {
       form: {
-        email: "",
+        user_id: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        id_photo: "",
         password: ""
       },
-      uploadfile: null
-    }
+      show: true
+    };
   },
   methods: {
-    register () {
-      this.$store.dispatch('userRegister',{
+    ...mapActions("account", ["register"]),
+    registerUser() {
+      this.register({
         user_id: this.form.studentID,
         password: this.form.password,
         firstName: this.form.firstName,
@@ -51,20 +69,17 @@ export default {
         validated: false
       });
 
-      this.$router.push({ name: 'pending'});
+      this.$router.push({ name: "items" });
     },
-    onFileChanged (event) {
-      const file = event.target.files[0]
+    onFileChanged(event) {
+      const file = event.target.files[0];
       this.uploadfile = file;
     },
     base64_encode() {
-      var bitmap = fs.readFileSync(this.file);
-      return new Buffer(bitmap).toString('base64');
+      // var bitmap = fs.readFileSync(this.file);
+      // return new Buffer(bitmap).toString('base64');
+      return "";
     }
   }
-}
+};
 </script>
-
-<style>
-@import '../assets/styles/register.css';
-</style>

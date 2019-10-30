@@ -1,23 +1,37 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import HomePage from '../home/HomePage'
-import LoginPage from '../login/LoginPage'
-import RegisterPage from '../register/RegisterPage'
-import ItemsPage from '../items/ItemsPage'
+import Home from './../views/Home';
+import Login from './../views/Login';
+import Register from './../views/Register';
+import ItemsPage from './../views/ItemsPage';
 
 Vue.use(Router);
 
 export const router = new Router({
   mode: 'history',
-  routes: [
-    { path: '/', component: HomePage },
-    { path: '/login', component: LoginPage },
-    { path: '/register', component: RegisterPage },
-    { path: '/items', component: ItemsPage },
+  routes: [{
+      path: '/',
+      component: Home
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/register',
+      component: Register
+    },
+    {
+      path: '/items',
+      component: ItemsPage
+    },
 
     // otherwise redirect to home
-    { path: '*', redirect: '/' }
+    {
+      path: '*',
+      redirect: '/'
+    }
   ]
 });
 
