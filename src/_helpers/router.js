@@ -11,10 +11,11 @@ Vue.use(Router);
 export const router = new Router({
   mode: 'history',
   routes: [
-    { path: '/', component: HomePage },
+    { path: '/', component: ItemsPage },
     { path: '/login', component: LoginPage },
     { path: '/register', component: RegisterPage },
     { path: '/items', component: ItemsPage },
+    { path: '/users', component: HomePage },
 
     // otherwise redirect to home
     { path: '*', redirect: '/' }
