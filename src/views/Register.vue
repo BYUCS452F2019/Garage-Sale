@@ -24,14 +24,24 @@
         <b-form-input id="input-2" v-model="form.lastName" required placeholder="Enter last name"></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-3" label="Student ID:" label-for="input-3">
-        <b-form-input id="input-3" v-model="form.user_id" required placeholder="Enter BYU student ID"></b-form-input>
+        <b-form-input
+          id="input-3"
+          v-model="form.user_id"
+          required
+          placeholder="Enter BYU student ID"
+        ></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-4" label="Password:" label-for="input-4">
-        <b-form-input id="input-4" type="password" v-model="form.password" required placeholder="Enter password"></b-form-input>
+        <b-form-input
+          id="input-4"
+          type="password"
+          v-model="form.password"
+          required
+          placeholder="Enter password"
+        ></b-form-input>
       </b-form-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
-      <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
@@ -50,21 +60,17 @@ export default {
         password: "",
         firstName: "",
         lastName: "",
-        id_photo: "",
         password: ""
       },
-      show: true
+      show: true,
+      file: "test. will be replaced."
     };
   },
   methods: {
     ...mapActions("account", ["register"]),
     registerUser() {
       this.register({
-        user_id: this.form.studentID,
-        password: this.form.password,
-        firstName: this.form.firstName,
-        lastName: this.form.lastName,
-        email: this.form.email,
+        ...this.form,
         id_photo: this.file,
         validated: false
       });
