@@ -1,0 +1,56 @@
+<template>
+  <div>
+    <b-button v-b-modal.remove-item>Visible Modal for now</b-button>
+
+    <b-modal id="remove-item" title="Remove Item" ok-title="Yes" cancel-title="No">
+      <p class="my-4">Are you sure you want to remove this item for sale?</p>
+    </b-modal>
+
+    <h2 style="display: inline-block">Profile</h2>
+    <contact />
+    <!-- <el-button style="float:right" @click="$router.push('/profile/edit')">Edit Profile</el-button> -->
+    <h4 style="text-align:center">My Items for Sell</h4>
+    <b-table striped hover :items="items" :fields="fields">
+      <template v-slot:cell(remove)="row">
+        <b-button size="sm" class="mr-1">stuff</b-button>
+      </template>
+    </b-table>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import Contact from "./Contact.vue";
+
+export default {
+  components: {
+    Contact
+  },
+  data() {
+    return {
+      fields: [
+        { label: "Item Name", key: "item_name" },
+        { label: "Description", key: "description" },
+        { label: "Date Added", key: "date_added" },
+        { label: "Price", key: "price" },
+        { label: "Area Code", key: "area_code" },
+        { label: "Remove", key: "remove" }
+      ],
+      items: [
+        {
+          item_name: "Cool Lamp",
+          description: "A sick Lamp!",
+          date_added: "10/30/2019",
+          price: "500",
+          area_code: "84606"
+        }
+      ]
+    };
+  },
+  methods: {
+    removeItem() {
+      this.addItemMenuVisible = false;
+    }
+  }
+};
+</script>
