@@ -1,74 +1,75 @@
 <template>
     <div><h2>Items</h2>
     <p>This will be where the list of items will be!</p>
-    <el-button @click="addItemMenuVisible = true">Add Item</el-button>
-    <el-dialog
-    :visible.sync="addItemMenuVisible"
-    title="Add Item"
-    width="40%">
-    <el-form 
-          ref="form" 
-          :model="form" 
-          label-width="120px">
-          <el-form-item label="Item Name">
-            <el-input v-model="form.name"/>
-          </el-form-item>
-          <el-form-item label="Item Description">
-            <el-input v-model="form.description"/>
-          </el-form-item>
-          <el-form-item label="Set Price">
-            <el-input v-model="form.price"/>
-          </el-form-item>
-        </el-form>
-        <span 
-          slot="footer" 
-          class="dialog-footer">
-          <el-button @click="addItemMenuVisible = false">Cancel</el-button>
-          <el-button 
-            type="primary" 
-            @click="addItem">Confirm</el-button>
-        </span>
-    </el-dialog>
-    <el-table
-      :data="tableData"
-      style="width: 100%">
-      <el-table-column
-        prop="itemname"
-        label="Item Name"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="itemdescription"
-        label="Description"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="dateadded"
-        label="Date Added">
-      </el-table-column>
-      <el-table-column
-        prop="price"
-        label="Price">
-      </el-table-column>
-      <el-table-column
-        prop="areacode"
-        label="Area Code">
-      </el-table-column>
-      <el-table-column
-        prop="seller"
-        label="Seller">
-      </el-table-column>
-      <el-table-column
-       prop="buy"
-       label="Operations">
-       <template slot-scope="scope">
-        <el-button
+    <div>
+      <b-button v-b-modal.modal-1>Add Item</b-button>
+
+      <b-modal id="modal-1" title="Add Item" ok-only ok-variant="secondary" ok-title="Cancel">
+        <b-form @submit.prevent="addItem" class="needs-validation">
+          <b-form-group
+          id="item-name"
+          label="Item Name"
+          label-for="input-1">
+          <b-form-input
+            id="input-1"
+            v-model="form.name"
             type="text"
-            size="small"
-            @click="buy(scope.$index, scope.row)">Buy Now</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+            class="form-control"
+            required
+            placeholder="Enter item name"></b-form-input>
+          </b-form-group>
+          <b-form-group
+          id="item-description"
+          label="Item Description"
+          label-for="input-2">
+          <b-form-input
+            id="input-2"
+            v-model="form.description"
+            type="text"
+            class="form-control"
+            required
+            placeholder="Enter item description"></b-form-input>
+          </b-form-group>
+          <b-form-group
+          id="item-price"
+          label="Item Price"
+          label-for="input-3">
+          <b-form-input
+            id="input-3"
+            v-model="form.price"
+            :state="validation"
+            class="form-control"
+            type="text"
+            required
+            placeholder="Enter item price. Must be a number"></b-form-input>
+            <b-form-invalid-feedback :state="validation">
+            Please enter a numerical item price.
+            </b-form-invalid-feedback>
+          </b-form-group>
+          <b-modal id="error" title="Error">
+            <p class="my-4">Please input a numerical price.</p>
+          </b-modal>
+          <b-button type="submit" variant="primary">Submit</b-button>
+        </b-form>
+      </b-modal>
+    </div>
+    <div>
+    <b-table striped hover 
+      ref="selectableTable"
+      selectable
+      :select-mode="selectMode"
+      :items="tableData"
+      selected-variant="active"
+      :fields="fields"
+      @row-selected="onRowSelected"
+      responsive="sm">
+    </b-table>
+    </div>
+
+    <p>
+      Selected Rows:<br>
+      {{ selected }}
+    </p>
 
     </div>
     
@@ -81,49 +82,48 @@ export default {
   data() {
         return {
           tableData: [{
-            itemname: 'Lamp',
-            itemdescription: 'Slightly dusty desk lamp',
-            dateadded: '10-18-2019',
+            item_name: 'Lamp',
+            item_description: 'Slightly dusty desk lamp',
+            date_added: '10-18-2019',
             price: '$10',
-            areacode: '55555',
+            area_code: '55555',
             seller: 'Bob'
           }],
           addItemMenuVisible: false,
+          formerror: false,
           form: {
             name: '',
             description: '',
             price: ''
           },
           date: '0',
-          itemdate: ''
+          itemdate: '',
+          selected: []
         }
+  },
+  computed: {
+    validation() {
+      if(this.form.price === '' || isNaN(this.form.price)) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
   },
   methods: {
     buy() {
       console.log("hi");
     },
+    onRowSelected(items) {
+        this.selected = items
+    },
     addItem() {
-      if (this.form.name === '') {
-        this.$alert('Please enter an item name', 'Error', {
-          confirmButtonText: 'OK'
-        })
-      }
-      else if (this.form.description === '') {
-        this.$alert('Please enter an item description', 'Error', {
-          confirmButtonText: 'OK'
-        })
-      }
-      else if (this.form.price === '' || isNaN(this.form.price)) {
-        this.$alert('Please enter a numerical item price', 'Error', {
-          confirmButtonText: 'OK'
-        })
+      if(this.form.price === '' || isNaN(this.form.price)) {
+        this.$bvModal.show("error");
       }
       else {
-        //code to add the item to the database
         console.log("Added item");
-        this.date = new Date();
-        this.itemdate = this.date.getMonth() + '-' + this.date.getDate() + '-' + this.date.getFullYear();
-        console.log(this.itemdate);
         const item = {
           name: this.form.name, 
           description: this.form.description, 
@@ -131,12 +131,14 @@ export default {
           //owner: ,
           //seller: ,
           //itemid: ,
-          date: this.itemdate
+          //date: this.itemdate
         }
         this.addItemMenuVisible = false;
-        //store dispatch or something
+        this.$bvModal.hide('modal-1');
+      //store dispatch or something
       }
-    }
+    },
+    
   }
-}
+};
 </script>
