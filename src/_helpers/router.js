@@ -5,12 +5,14 @@ import Home from './../views/Home';
 import Login from './../views/Login';
 import Register from './../views/Register';
 import ItemsPage from './../views/ItemsPage';
+import ProfilePage from './../views/ProfilePage';
 
 Vue.use(Router);
 
 export const router = new Router({
   mode: 'history',
-  routes: [{
+  routes: [
+    {
       path: '/',
       component: Home
     },
@@ -25,6 +27,10 @@ export const router = new Router({
     {
       path: '/items',
       component: ItemsPage
+    },
+    {
+      path: '/profile',
+      component: ProfilePage
     },
 
     // otherwise redirect to home
@@ -41,9 +47,18 @@ export const router = new Router({
 //   const authRequired = !publicPages.includes(to.path);
 //   const loggedIn = localStorage.getItem('user');
 
+<<<<<<< HEAD
+  // if (authRequired && !loggedIn) {
+  //   return next('/login');
+  // }
+
+  next();
+});
+=======
 //   if (authRequired && !loggedIn) {
 //     return next('/login');
 //   }
 
 //   next();
 // })
+>>>>>>> 796043e84fba3ef30b95b8384bc14df1e04739dd

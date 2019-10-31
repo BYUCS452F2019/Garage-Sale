@@ -8,13 +8,14 @@
       <label-value label="Last Name" value="Doe"></label-value>
       <label-value label="Email" value="john_doe@byu.edu"></label-value>
       <label-value label="StudentID" value="420420420"></label-value>
+      <label-value label="Area Code" value="22015"></label-value>
     </div>
   </div>
 </template>
 
 <script>
 import LabelValue from "./LabelValue";
-import avatar from "@/assets/avatar.png";
+import avatar from "./../assets/avatar.png";
 
 export default {
   name: "ContactInfo",
