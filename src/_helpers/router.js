@@ -41,15 +41,24 @@ export const router = new Router({
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/login', '/register'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
+// router.beforeEach((to, from, next) => {
+//   // redirect to login page if not logged in and trying to access a restricted page
+//   const publicPages = ['/login', '/register'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem('user');
 
+<<<<<<< HEAD
   // if (authRequired && !loggedIn) {
   //   return next('/login');
   // }
 
   next();
 });
+=======
+//   if (authRequired && !loggedIn) {
+//     return next('/login');
+//   }
+
+//   next();
+// })
+>>>>>>> 796043e84fba3ef30b95b8384bc14df1e04739dd

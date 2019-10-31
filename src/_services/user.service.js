@@ -1,5 +1,7 @@
 import config from 'config';
-import { authHeader } from '../_helpers';
+import {
+    authHeader
+} from '../_helpers';
 
 export const userService = {
     login,
@@ -11,11 +13,13 @@ export const userService = {
     delete: _delete
 };
 
-function login(username, password) {
+function login(user) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
     };
 
     return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
@@ -33,13 +37,16 @@ function login(username, password) {
 
 function logout() {
     // remove user from local storage to log user out
+    console.log("Logout!");
     localStorage.removeItem('user');
 }
 
 function register(user) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(user)
     };
 
@@ -68,7 +75,10 @@ function getById(id) {
 function update(user) {
     const requestOptions = {
         method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        headers: {
+            ...authHeader(),
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(user)
     };
 
