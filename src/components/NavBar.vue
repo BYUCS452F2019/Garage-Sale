@@ -10,7 +10,7 @@
       <b-navbar-nav>
         <b-nav-item href="/login" v-if="!isLoggedIn">Login</b-nav-item>
         <b-nav-item href="/register" v-if="!isLoggedIn">Register</b-nav-item>
-        <b-nav-item href="#" v-if="isLoggedIn">Items</b-nav-item>
+        <b-nav-item href="/items" v-if="isLoggedIn">Items</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

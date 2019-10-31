@@ -27,7 +27,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button> OR <router-link to="/register">Register</router-link>
+      <b-button type="submit" variant="info">Submit</b-button> OR <router-link to="/register">Register</router-link>
     </b-form>
   </div>
 </template>
