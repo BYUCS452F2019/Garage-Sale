@@ -1,99 +1,111 @@
 import { userService } from '../_services';
 
 const state = {
-    all: {},
-    userItems: []
+  all: {},
+  allItems: [],
+  userItems: []
 };
 
 const actions = {
-    getAll({ commit }) {
-        commit('getAllRequest');
+  getAllItems({ commit }) {
+    // commit('getAllRequest');
 
-        userService.getAll()
-            .then(
-                users => commit('getAllSuccess', users),
-                error => commit('getAllFailure', error)
-            );
-    },
+    // userService
+    //   .getAll()
+    //   .then(
+    //     users => {commit('getAllSuccess', users),
+    //     error => commit('getAllFailure', error)
+    //   );
 
-    getAllUserItems({ commit }, userID) {
-         //commit('getAllUserItemsRequest');
+    userService.getAllItems().then(
+      items => {
+        console.log(items);
+        commit('addAllItems', items);
+      },
+      error => commit('getAllFailure', error)
+    );
+  },
+  getAllUserItems({ commit }, userID) {
+    //commit('getAllUserItemsRequest');
 
-         userService.getItemsByUserID(userID)
-            .then(
-                userItems => {commit('getAllUserItemsSuccess', userItems)
-                              console.log(userItems)  },
-                error => commit('getAllUserItemsFailure', error)
-            )
-    },
+    userService.getItemsByUserID(userID).then(
+      userItems => {
+        commit('getAllUserItemsSuccess', userItems);
+        console.log(userItems);
+      },
+      error => commit('getAllUserItemsFailure', error)
+    );
+  },
 
-    addItem({ commit, dispatch }, userform) {
-        
-        userService.addItem(userform)
-            .then(() => dispatch('getAllUserItems', userform.userId));
-        
-    },
+  addItem({ commit, dispatch }, userform) {
+    userService
+      .addItem(userform)
+      .then(() => dispatch('getAllUserItems', userform.userId));
+  },
 
-    delete({ commit }, id) {
-        commit('deleteRequest', id);
+  // Stopping point
+  delete({ commit }, id) {
+    commit('deleteRequest', id);
 
-        userService.delete(id)
-            .then(
-                user => commit('deleteSuccess', id),
-                error => commit('deleteFailure', { id, error: error.toString() })
-            );
-    }
+    userService
+      .delete(id)
+      .then(
+        user => commit('deleteSuccess', id),
+        error => commit('deleteFailure', { id, error: error.toString() })
+      );
+  }
 };
 
 const mutations = {
-    getAllRequest(state) {
-        state.all = { loading: true };
-    },
-    getAllSuccess(state, users) {
-        state.all = { items: users };
-    },
-    getAllFailure(state, error) {
-        state.all = { error };
-    },
-    getAllUserItemsSuccess(state, userItems) {
-        state.userItems = [...userItems];
-    },
-    getAllUserItemsFailure(state, error) {
-        state.userItems = error;
-    },
-    addItem(state, item){
-        state.userItems.push(item);
-    },
-    deleteRequest(state, id) {
-        // add 'deleting:true' property to user being deleted
-        state.all.items = state.all.items.map(user =>
-            user.id === id
-                ? { ...user, deleting: true }
-                : user
-        )
-    },
-    deleteSuccess(state, id) {
-        // remove deleted user from state
-        state.all.items = state.all.items.filter(user => user.id !== id)
-    },
-    deleteFailure(state, { id, error }) {
-        // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
-        state.all.items = state.items.map(user => {
-            if (user.id === id) {
-                // make copy of user without 'deleting:true' property
-                const { deleting, ...userCopy } = user;
-                // return copy of user with 'deleteError:[error]' property
-                return { ...userCopy, deleteError: error };
-            }
+  getAllRequest(state) {
+    state.all = { loading: true };
+  },
+  addAllItems(state, items) {
+    state.allItems = [...items];
+  },
+  getAllSuccess(state, users) {
+    state.all = { items: users };
+  },
+  getAllFailure(state, error) {
+    state.all = { error };
+  },
+  getAllUserItemsSuccess(state, userItems) {
+    state.userItems = [...userItems];
+  },
+  getAllUserItemsFailure(state, error) {
+    state.userItems = error;
+  },
+  addItem(state, item) {
+    state.userItems.push(item);
+  },
+  deleteRequest(state, id) {
+    // add 'deleting:true' property to user being deleted
+    state.all.items = state.all.items.map(user =>
+      user.id === id ? { ...user, deleting: true } : user
+    );
+  },
+  deleteSuccess(state, id) {
+    // remove deleted user from state
+    state.all.items = state.all.items.filter(user => user.id !== id);
+  },
+  deleteFailure(state, { id, error }) {
+    // remove 'deleting:true' property and add 'deleteError:[error]' property to user
+    state.all.items = state.items.map(user => {
+      if (user.id === id) {
+        // make copy of user without 'deleting:true' property
+        const { deleting, ...userCopy } = user;
+        // return copy of user with 'deleteError:[error]' property
+        return { ...userCopy, deleteError: error };
+      }
 
-            return user;
-        })
-    }
+      return user;
+    });
+  }
 };
 
 export const users = {
-    namespaced: true,
-    state,
-    actions,
-    mutations
+  namespaced: true,
+  state,
+  actions,
+  mutations
 };
