@@ -1,31 +1,39 @@
 import { userService } from '../_services';
 
 const state = {
-    all: {},
-    userItems: []
+  all: {},
+  allItems: [],
+  userItems: []
 };
 
 const actions = {
-    getAll({ commit }) {
-        commit('getAllRequest');
+  getAllItems({ commit }) {
+    // commit('getAllRequest');
 
-        userService.getAll()
-            .then(
-                users => commit('getAllSuccess', users),
-                error => commit('getAllFailure', error)
-            );
-    },
+    // userService
+    //   .getAll()
+    //   .then(
+    //     users => {commit('getAllSuccess', users),
+    //     error => commit('getAllFailure', error)
+    //   );
 
-    getAllUserItems({ commit }, userID) {
-         //commit('getAllUserItemsRequest');
+    userService.getAllItems().then(
+      items => {
+        commit('addAllItems', items);
+      },
+      error => commit('getAllFailure', error)
+    );
+  },
+  getAllUserItems({ commit }, userID) {
+    //commit('getAllUserItemsRequest');
 
-         userService.getItemsByUserID(userID)
-            .then(
-                userItems => {commit('getAllUserItemsSuccess', userItems)
-                              console.log(userItems)  },
-                error => commit('getAllUserItemsFailure', error)
-            )
-    },
+    userService.getItemsByUserID(userID).then(
+      userItems => {
+        commit('getAllUserItemsSuccess', userItems);
+      },
+      error => commit('getAllUserItemsFailure', error)
+    );
+  },
 
     addItem({ commit, dispatch }, userform) {
         
@@ -34,21 +42,26 @@ const actions = {
         
     },
 
-    delete({ commit }, id) {
-        commit('deleteRequest', id);
+  // Stopping point
+  delete({ commit }, id) {
+    commit('deleteRequest', id);
 
-        userService.delete(id)
-            .then(
-                user => commit('deleteSuccess', id),
-                error => commit('deleteFailure', { id, error: error.toString() })
-            );
-    }
+    userService
+      .delete(id)
+      .then(
+        user => commit('deleteSuccess', id),
+        error => commit('deleteFailure', { id, error: error.toString() })
+      );
+  }
 };
 
 const mutations = {
     getAllRequest(state) {
         state.all = { loading: true };
     },
+    addAllItems(state, items) {
+        state.allItems = [...items];
+      },
     getAllSuccess(state, users) {
         state.all = { items: users };
     },
@@ -85,15 +98,13 @@ const mutations = {
                 // return copy of user with 'deleteError:[error]' property
                 return { ...userCopy, deleteError: error };
             }
-
-            return user;
-        })
+        });
     }
 };
 
 export const users = {
-    namespaced: true,
-    state,
-    actions,
-    mutations
+  namespaced: true,
+  state,
+  actions,
+  mutations
 };
