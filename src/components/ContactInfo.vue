@@ -18,6 +18,15 @@ import LabelValue from "./LabelValue";
 import avatar from "./../assets/avatar.png";
 
 export default {
+  created() {
+    this.getUserInfo();
+  },
+  computed: {
+    ...mapState("users", ["userInfo"])
+  },
+  methods: {
+    ...mapActions("users", ["getUserInfo"])
+  },
   name: "ContactInfo",
   components: { LabelValue },
   props: {

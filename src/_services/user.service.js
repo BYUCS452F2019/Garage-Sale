@@ -2,6 +2,7 @@ import config from 'config';
 import { authHeader } from '../_helpers';
 
 export const userService = {
+  getUserInfo,
   getAllItems,
   login,
   logout,
@@ -77,6 +78,19 @@ function getItemsByUserID(userID) {
   };
   return fetch(
     `${config.apiUrl}/users/getItemsById/${userID}`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function getUserInfo(userID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  return fetch(
+    `${config.apiUrl}/users/getUserInfo/${userID}`,
     requestOptions
   ).then(handleResponse);
 }

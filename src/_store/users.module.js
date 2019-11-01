@@ -3,7 +3,8 @@ import { userService } from '../_services';
 const state = {
   all: {},
   allItems: [],
-  userItems: []
+  userItems: [],
+  userInfo: []
 };
 
 const actions = {
@@ -36,6 +37,16 @@ const actions = {
       error => commit('getAllUserItemsFailure', error)
     );
   },
+  getUserInfo({ commit }, userID) {
+    //commit('getAllUserItemsRequest');
+
+    userService.getUserInfo(userID).then(
+      userInfo => {
+        commit('getUserInfo', userInfo);
+      },
+      error => commit('getAllFailure', error)
+    );
+  },
 
   addItem({ commit, dispatch }, userform) {
     userService
@@ -62,6 +73,9 @@ const mutations = {
   },
   addAllItems(state, items) {
     state.allItems = [...items];
+  },
+  addAllItems(state, userInfo) {
+    state.userInfo = [...userInfo];
   },
   getAllSuccess(state, users) {
     state.all = { items: users };
