@@ -5,6 +5,7 @@
     </b-modal>
     <h1 style="text-align:center">Profile</h1>
     <contact />
+    <add-items-button />
     <!-- <el-button style="float:right" @click="$router.push('/profile/edit')">Edit Profile</el-button> -->
     <h4 style="text-align:center">My Items for Sell</h4>
     <b-table striped hover :items="userItems" :fields="data">
@@ -20,10 +21,12 @@
 // @ is an alias to /src
 import Contact from "./Contact";
 import { mapState, mapActions } from 'vuex';
+import AddItemsButton from "./../components/AddItemsButton";
 
 export default {
   components: {
-    Contact
+    Contact,
+    AddItemsButton
   },
   data() {
     return {
@@ -51,10 +54,10 @@ export default {
     ...mapState("account", ["user"]),
   },
   created() {
-   // if (user){
-      //const userId = user.userId;
-      this.getAllUserItems('123123');
-    //}
+    if (this.user){
+      const userId = this.user.userId;
+      this.getAllUserItems(userId);
+    }
     
   },
   methods: {

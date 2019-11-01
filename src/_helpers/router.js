@@ -4,7 +4,6 @@ import Router from 'vue-router';
 import Home from './../views/Home';
 import Login from './../views/Login';
 import Register from './../views/Register';
-import ItemsPage from './../views/ItemsPage';
 import ProfilePage from './../views/ProfilePage';
 
 Vue.use(Router);
@@ -23,10 +22,6 @@ export const router = new Router({
     {
       path: '/register',
       component: Register
-    },
-    {
-      path: '/items',
-      component: ItemsPage
     },
     {
       path: '/profile',

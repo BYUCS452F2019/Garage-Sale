@@ -1,11 +1,10 @@
 <template>
-    <div><h2>Items</h2>
-    <p>This will be where the list of items will be!</p>
+    <div>
     <div>
       <b-button v-b-modal.modal-1>Add Item</b-button>
 
       <b-modal id="modal-1" title="Add Item" ok-only ok-variant="secondary" ok-title="Cancel">
-        <b-form @submit.prevent="addItem" class="needs-validation">
+        <b-form @submit.prevent="addUserItem" class="needs-validation">
           <b-form-group
           id="item-name"
           label="Item Name"
@@ -84,40 +83,17 @@
         </b-form>
       </b-modal>
     </div>
-    <div>
-    <b-table striped hover 
-      ref="selectableTable"
-      selectable
-      :select-mode="selectMode"
-      :items="tableData"
-      @row-selected="onRowSelected"
-      responsive="sm">
-    </b-table>
-    </div>
-
-    <p>
-      Selected Rows:<br>
-      {{ selected }}
-    </p>
-
     </div>
     
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'itemslist',
+  name: 'additemsbutton',
   data() {
         return {
-          tableData: [{
-            item_name: 'Lamp',
-            item_description: 'Slightly dusty desk lamp',
-            date_added: '10-18-2019',
-            price: '$10',
-            area_code: '55555',
-            seller: 'Bob'
-          }],
           addItemMenuVisible: false,
           formerror: false,
           form: {
@@ -126,14 +102,11 @@ export default {
             price: '',
             area_code: '',
             seller: ''
-          },
-          date: '0',
-          itemdate: '',
-          selected: [],
-          selectMode: 'single'
+          }
         }
   },
   computed: {
+    ...mapState("account", ["user"]),
     validation() {
       if(this.form.price === '' || isNaN(this.form.price)) {
         return false;
@@ -152,13 +125,8 @@ export default {
     }
   },
   methods: {
-    buy() {
-      console.log("hi");
-    },
-    onRowSelected(items) {
-        this.selected = items
-    },
-    addItem() {
+    ...mapActions("users", ["addItem"]),
+    addUserItem() {
       if(this.form.price === '' || isNaN(this.form.price)) {
         this.$bvModal.show("error");
       }
@@ -166,15 +134,7 @@ export default {
         this.$bvModal.show("error-areacode");
       }
       else {
-        console.log("Added item");
-        const item = {
-          name: this.form.name, 
-          description: this.form.description, 
-          price: this.form.price, 
-          seller: this.form.seller,
-          area_code: this.form.area_code
-        }
-        this.addItemMenuVisible = false;
+        this.addItem({user_id: this.user.user_id, form: this.form})
         this.$bvModal.hide('modal-1');
       //store dispatch or something
       }
