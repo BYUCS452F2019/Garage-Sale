@@ -2,7 +2,8 @@
     
 <div>
   <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="/">Garage Sale</b-navbar-brand>
+    <b-navbar-brand href="/" v-if="!status.loggedIn">Garage Sale</b-navbar-brand>
+    <b-navbar-brand v-if="status.loggedIn">Garage Sale</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
