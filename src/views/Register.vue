@@ -75,7 +75,7 @@ export default {
         validated: false
       });
 
-      this.$router.push('/profile');
+      this.$router.push('/login');
     },
     onFileChanged(event) {
       const file = event.target.files[0];
