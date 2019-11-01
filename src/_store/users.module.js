@@ -2,8 +2,10 @@ import { userService } from '../_services';
 
 const state = {
     all: {},
-    userItems: []
+    userItems: [],
+    userInfo: []
 };
+
 
 const actions = {
     getAll({ commit }) {
@@ -34,6 +36,16 @@ const actions = {
             .then(
                 user => commit('deleteSuccess', id),
                 error => commit('deleteFailure', { id, error: error.toString() })
+            );
+    },
+    getUserInfo({commit}, userId) {
+        commit('getUserInfoRequest');
+        
+        userService.getUserInfoByUserId(userId)
+            .then(
+                userInfo => {commit('getUserInfoSuccess', userInfo)
+                            console.log(userInfo)},
+                error => commit('getUserInfoFailure', error)
             );
     }
 };

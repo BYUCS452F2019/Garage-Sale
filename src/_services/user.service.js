@@ -11,6 +11,7 @@ export const userService = {
     getAll,
     getById,
     update,
+    getUserInfoByUserId,
     delete: _delete
 };
 
@@ -60,7 +61,15 @@ function getItemsByUserID(userID) {
     };
     return fetch(`${config.apiUrl}/users/getItemsById/${userID}`, requestOptions).then(handleResponse);
 }
-console.log()
+function getUserInfoByUserId(userId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    return fetch(`${config.apiUrl}/users/getUserInfo/${userId}`, requestOptions).then(handleResponse);
+}
 function getAll() {
     const requestOptions = {
         method: 'GET',
