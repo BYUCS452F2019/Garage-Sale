@@ -5,9 +5,10 @@
     </b-modal>
     <h1 style="text-align:center">Profile</h1>
     <contact />
+    <add-items-button />
     <!-- <el-button style="float:right" @click="$router.push('/profile/edit')">Edit Profile</el-button> -->
     <h4 style="text-align:center">My Items for Sell</h4>
-    <b-table striped hover :items="items" :fields="data">
+    <b-table striped hover :items="userItems" :fields="data">
       <!-- <template v-slot:cell(remove)>
         <b-button size="sm" class="mr-1">stuff</b-button>
       </template>-->
@@ -19,10 +20,13 @@
 <script>
 // @ is an alias to /src
 import Contact from "./Contact";
+import { mapState, mapActions } from 'vuex';
+import AddItemsButton from "./../components/AddItemsButton";
 
 export default {
   components: {
-    Contact
+    Contact,
+    AddItemsButton
   },
   data() {
     return {
@@ -45,7 +49,19 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState("users", ["userItems"]),
+    ...mapState("account", ["user"]),
+  },
+  created() {
+    if (this.user){
+      const userId = this.user.userId;
+      this.getAllUserItems(userId);
+    }
+    
+  },
   methods: {
+    ...mapActions("users", ["getAllUserItems"] ),
     removeItem() {
       this.addItemMenuVisible = false;
     }

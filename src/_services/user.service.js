@@ -6,6 +6,7 @@ export const userService = {
   login,
   logout,
   register,
+  getItemsByUserID,
   getAll,
   getById,
   update,
@@ -63,6 +64,42 @@ function getAllItems() {
   };
 
   return fetch(`${config.apiUrl}/users/getAllItems`, requestOptions).then(
+    handleResponse
+  );
+}
+
+function getItemsByUserID(userID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  return fetch(
+    `${config.apiUrl}/users/getItemsById/${userID}`,
+    requestOptions
+  ).then(handleResponse);
+}
+
+function addItem(userform) {
+  const { user_id, form } = userform;
+  const { name, description, price, area_code } = form;
+  const item = {
+    item_name: name,
+    item_descr: description,
+    price,
+    user_id,
+    area_code,
+    seller_id: user_id
+  };
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(item)
+  };
+  return fetch(`${config.apiUrl}/users/addItem`, requestOptions).then(
     handleResponse
   );
 }

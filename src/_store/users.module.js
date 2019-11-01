@@ -2,7 +2,8 @@ import { userService } from '../_services';
 
 const state = {
   all: {},
-  allItems: []
+  allItems: [],
+  userItems: []
 };
 
 const actions = {
@@ -24,7 +25,25 @@ const actions = {
       error => commit('getAllFailure', error)
     );
   },
+  getAllUserItems({ commit }, userID) {
+    //commit('getAllUserItemsRequest');
 
+    userService.getItemsByUserID(userID).then(
+      userItems => {
+        commit('getAllUserItemsSuccess', userItems);
+        console.log(userItems);
+      },
+      error => commit('getAllUserItemsFailure', error)
+    );
+  },
+
+  addItem({ commit, dispatch }, userform) {
+    userService
+      .addItem(userform)
+      .then(() => dispatch('getAllUserItems', userform.userId));
+  },
+
+  // Stopping point
   delete({ commit }, id) {
     commit('deleteRequest', id);
 
@@ -49,6 +68,15 @@ const mutations = {
   },
   getAllFailure(state, error) {
     state.all = { error };
+  },
+  getAllUserItemsSuccess(state, userItems) {
+    state.userItems = [...userItems];
+  },
+  getAllUserItemsFailure(state, error) {
+    state.userItems = error;
+  },
+  addItem(state, item) {
+    state.userItems.push(item);
   },
   deleteRequest(state, id) {
     // add 'deleting:true' property to user being deleted
