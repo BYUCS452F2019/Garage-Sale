@@ -30,7 +30,7 @@ const actions = {
     addItem({ commit, dispatch }, userform) {
         
         userService.addItem(userform)
-            .then(() => dispatch('getAllUserItems', userform.userId));
+            .then(() => dispatch('getAllUserItems', userform.user_id));
         
     },
 
@@ -56,7 +56,7 @@ const mutations = {
         state.all = { error };
     },
     getAllUserItemsSuccess(state, userItems) {
-        state.userItems = [...userItems];
+        state.userItems = [...userItems]
     },
     getAllUserItemsFailure(state, error) {
         state.userItems = error;

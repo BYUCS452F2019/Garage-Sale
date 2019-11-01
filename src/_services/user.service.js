@@ -59,6 +59,7 @@ function getItemsByUserID(userID) {
             'Content-Type': 'application/json'
         }
     };
+    
     return fetch(`${config.apiUrl}/users/getItemsById/${userID}`, requestOptions).then(handleResponse);
 }
 
