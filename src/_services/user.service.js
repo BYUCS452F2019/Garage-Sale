@@ -7,6 +7,7 @@ export const userService = {
     login,
     logout,
     register,
+    getItemsByUserID,
     getAll,
     getById,
     update,
@@ -51,6 +52,16 @@ function register(user) {
     return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
+function getItemsByUserID(userID) {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    return fetch(`${config.apiUrl}/users/getItemsById/${userID}`, requestOptions).then(handleResponse);
+}
+console.log()
 function getAll() {
     const requestOptions = {
         method: 'GET',

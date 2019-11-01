@@ -7,7 +7,7 @@
     <contact />
     <!-- <el-button style="float:right" @click="$router.push('/profile/edit')">Edit Profile</el-button> -->
     <h4 style="text-align:center">My Items for Sell</h4>
-    <b-table striped hover :items="items" :fields="data">
+    <b-table striped hover :items="userItems" :fields="data">
       <!-- <template v-slot:cell(remove)>
         <b-button size="sm" class="mr-1">stuff</b-button>
       </template>-->
@@ -19,6 +19,7 @@
 <script>
 // @ is an alias to /src
 import Contact from "./Contact";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -45,7 +46,19 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState("users", ["userItems"]),
+    ...mapState("account", ["user"]),
+  },
+  created() {
+   // if (user){
+      //const userId = user.userId;
+      this.getAllUserItems('123123');
+    //}
+    
+  },
   methods: {
+    ...mapActions("users", ["getAllUserItems"] ),
     removeItem() {
       this.addItemMenuVisible = false;
     }
