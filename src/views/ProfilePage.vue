@@ -54,10 +54,14 @@ export default {
     ...mapState("account", ["user"]),
   },
   created() {
-    if (this.user){
-      const userId = this.user.userId;
-      this.getAllUserItems(userId);
-    }
+    const waitForUser = setInterval(()=> {
+      if (this.user){
+        clearInterval(waitForUser);
+        const user_id = this.user.user_id;
+        this.getAllUserItems(user_id);
+      }
+    }, 10);
+    
     
   },
   methods: {

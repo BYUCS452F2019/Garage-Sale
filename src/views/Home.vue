@@ -39,7 +39,6 @@ export default {
   },
   created() {
     this.getAllItems();
-    console.log(this.allItems);
   },
   computed: {
     ...mapState("users", ["allItems"])

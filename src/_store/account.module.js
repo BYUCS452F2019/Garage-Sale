@@ -36,6 +36,7 @@ const actions = {
             })
             .then(
                 user => {
+                    console.log(user)
                     commit('loginSuccess', user);
                     router.push('/profile');
                 },
