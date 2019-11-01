@@ -49,6 +49,37 @@
           <b-modal id="error" title="Error">
             <p class="my-4">Please input a numerical price.</p>
           </b-modal>
+          <b-form-group
+          id="area-code"
+          label="Area Code"
+          label-for="input-4">
+          <b-form-input
+            id="input-4"
+            v-model="form.area_code"
+            :state="validationAreacode"
+            type="text"
+            class="form-control"
+            required
+            placeholder="Enter your area code"></b-form-input>
+            <b-form-invalid-feedback :state="validationAreacode">
+            Please enter a numerical item price.
+            </b-form-invalid-feedback>
+          </b-form-group>
+          <b-modal id="error-areacode" title="Error">
+            <p class="my-4">Please input a numerical area code.</p>
+          </b-modal>
+          <b-form-group
+          id="seller"
+          label="Seller"
+          label-for="input-5">
+          <b-form-input
+            id="input-5"
+            v-model="form.seller"
+            type="email"
+            class="form-control"
+            required
+            placeholder="Enter seller's email"></b-form-input>
+          </b-form-group>
           <b-button type="submit" variant="primary">Submit</b-button>
         </b-form>
       </b-modal>
@@ -59,8 +90,6 @@
       selectable
       :select-mode="selectMode"
       :items="tableData"
-      selected-variant="active"
-      :fields="fields"
       @row-selected="onRowSelected"
       responsive="sm">
     </b-table>
@@ -94,16 +123,27 @@ export default {
           form: {
             name: '',
             description: '',
-            price: ''
+            price: '',
+            area_code: '',
+            seller: ''
           },
           date: '0',
           itemdate: '',
-          selected: []
+          selected: [],
+          selectMode: 'single'
         }
   },
   computed: {
     validation() {
       if(this.form.price === '' || isNaN(this.form.price)) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    },
+    validationAreacode() {
+      if(this.form.area_code === '' || isNaN(this.form.area_code)) {
         return false;
       }
       else {
@@ -122,16 +162,17 @@ export default {
       if(this.form.price === '' || isNaN(this.form.price)) {
         this.$bvModal.show("error");
       }
+      else if(this.form.area_code === '' || isNaN(this.form.area_code)) {
+        this.$bvModal.show("error-areacode");
+      }
       else {
         console.log("Added item");
         const item = {
           name: this.form.name, 
           description: this.form.description, 
           price: this.form.price, 
-          //owner: ,
-          //seller: ,
-          //itemid: ,
-          //date: this.itemdate
+          seller: this.form.seller,
+          area_code: this.form.area_code
         }
         this.addItemMenuVisible = false;
         this.$bvModal.hide('modal-1');
