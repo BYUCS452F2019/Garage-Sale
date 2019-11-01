@@ -75,7 +75,7 @@ export default {
         validated: false
       });
 
-      this.$router.push({ name: "items" });
+      this.$router.push('/profile');
     },
     onFileChanged(event) {
       const file = event.target.files[0];
