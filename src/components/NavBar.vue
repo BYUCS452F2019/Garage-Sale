@@ -8,15 +8,15 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="/login" v-if="!isLoggedIn()">Login</b-nav-item>
-        <b-nav-item href="/register" v-if="!isLoggedIn()">Register</b-nav-item>
-        <b-nav-item href="/items" v-if="isLoggedIn()">Items</b-nav-item>
+        <b-nav-item href="/login" v-if="!status.loggedIn">Login</b-nav-item>
+        <b-nav-item href="/register" v-if="!status.loggedIn">Register</b-nav-item>
+        <b-nav-item href="/items" v-if="status.loggedIn">Items</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
 
-        <b-nav-item-dropdown right v-if="isLoggedIn()">
+        <b-nav-item-dropdown right v-if="status.loggedIn">
           <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
             <em>User</em>
@@ -39,12 +39,11 @@ import {
 
 export default {
   name: "navBar",
+  computed: {
+    ...mapState("account", ["status"])
+  },
   methods: {
     ...mapActions("account", ["logout"]),
-    isLoggedIn() {
-      console.log(localStorage.getItem('user'));
-      return localStorage.getItem('user') != null;
-    },
     logoutUser(){
       this.logout()
       router.push('/login');
