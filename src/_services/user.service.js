@@ -10,6 +10,7 @@ export const userService = {
     getItemsByUserID,
     getAll,
     getById,
+    addItem,
     update,
     delete: _delete
 };
@@ -60,7 +61,22 @@ function getItemsByUserID(userID) {
     };
     return fetch(`${config.apiUrl}/users/getItemsById/${userID}`, requestOptions).then(handleResponse);
 }
-console.log()
+
+function addItem(userform) {
+    const { user_id, form } = userform;
+    const { name, description, price, area_code } = form;
+    const item = {  item_name: name, item_descr: description, price, user_id, area_code, seller_id: user_id }
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+    };
+    return fetch(`${config.apiUrl}/users/addItem`, requestOptions).then(handleResponse);
+
+}
+
 function getAll() {
     const requestOptions = {
         method: 'GET',

@@ -17,7 +17,7 @@ const actions = {
     },
 
     getAllUserItems({ commit }, userID) {
-         commit('getAllUserItemsRequest');
+         //commit('getAllUserItemsRequest');
 
          userService.getItemsByUserID(userID)
             .then(
@@ -25,6 +25,13 @@ const actions = {
                               console.log(userItems)  },
                 error => commit('getAllUserItemsFailure', error)
             )
+    },
+
+    addItem({ commit, dispatch }, userform) {
+        
+        userService.addItem(userform)
+            .then(() => dispatch('getAllUserItems', userform.userId));
+        
     },
 
     delete({ commit }, id) {
@@ -53,6 +60,9 @@ const mutations = {
     },
     getAllUserItemsFailure(state, error) {
         state.userItems = error;
+    },
+    addItem(state, item){
+        state.userItems.push(item);
     },
     deleteRequest(state, id) {
         // add 'deleting:true' property to user being deleted
