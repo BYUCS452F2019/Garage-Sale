@@ -57,8 +57,8 @@ export default {
     const waitForUser = setInterval(()=> {
       if (this.user){
         clearInterval(waitForUser);
-        const user_id = this.user.user_id;
-        this.getAllUserItems(user_id);
+        const userId = this.user.userId;
+        this.getAllUserItems(userId);
       }
     }, 10);
     

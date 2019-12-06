@@ -38,7 +38,7 @@ const actions = {
     addItem({ commit, dispatch }, userform) {
         
         userService.addItem(userform)
-            .then(() => dispatch('getAllUserItems', userform.user_id));
+            .then(() => dispatch('getAllUserItems', userform.userId));
         
     },
 

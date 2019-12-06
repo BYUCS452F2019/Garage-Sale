@@ -80,15 +80,15 @@ function getItemsByUserID(userID) {
 }
 
 function addItem(userform) {
-  const { user_id, form } = userform;
+  const { userId, form } = userform;
   const { name, description, price, area_code } = form;
   const item = {
     item_name: name,
     item_descr: description,
     price,
-    user_id,
+    userId,
     area_code,
-    seller_id: user_id
+    seller_id: userId
   };
   const requestOptions = {
     method: 'POST',
@@ -150,6 +150,7 @@ function _delete(id) {
 }
 
 function handleResponse(response) {
+  console.log(response);
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {

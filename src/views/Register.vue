@@ -26,7 +26,7 @@
       <b-form-group id="input-group-3" label="Student ID:" label-for="input-3">
         <b-form-input
           id="input-3"
-          v-model="form.user_id"
+          v-model="form.userId"
           required
           placeholder="Enter BYU student ID"
         ></b-form-input>
@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       form: {
-        user_id: "",
+        userId: "",
         password: "",
         firstName: "",
         lastName: "",

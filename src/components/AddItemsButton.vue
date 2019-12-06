@@ -134,7 +134,7 @@ export default {
         this.$bvModal.show("error-areacode");
       }
       else {
-        this.addItem({user_id: this.user.user_id, form: this.form})
+        this.addItem({userId: this.user.userId, form: this.form})
         this.$bvModal.hide('modal-1');
       //store dispatch or something
       }
